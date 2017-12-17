@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 
-const imagem = require('../../imgs/jokenpo.png');
+const imagem = require('../../imgs/logo.png');
 
 class Topo extends Component {
   render() {

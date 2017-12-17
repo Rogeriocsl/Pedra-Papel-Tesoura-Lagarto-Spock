@@ -135,4 +135,3 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('app3', () => app3);
