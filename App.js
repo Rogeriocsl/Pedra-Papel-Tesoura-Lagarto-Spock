@@ -1,134 +1,138 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  Button,
+  View,
+} from 'react-native';
 
-import Top from './src/components/Top';
-import Icon from './src/components/Icon';
+import Topo from './src/components/topo';
+import Icone from './src/components/icone';
 
+export default class App extends React.Component  {
 
-export default class App extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state = {escolhaUsuario : '',
-                  escolhaDoRobo : '',
-                   resultado : ''
-                  }   
+    this.state = { escolhaUsuario: '', escolhaComputador: '', resultado: '' };
   }
 
-  jokenLagartoSpock(escolhaUsuario){
-    
-    var numeroAleatorio = Math.floor(Math.random() * 5);
+  jokenpo(escolhaUsuario) {
+    //gera número aleatório ( 0, 1, 2)
+    const numAleatorio = Math.floor(Math.random() * 3);
 
-    var escolhaDoRobo = '';
-    
-    switch (numeroAleatorio) {
-     case 0: escolhaDoRobo = 'PEDRA'; break;
-     case 1: escolhaDoRobo = 'PAPEL'; break;
-     case 2: escolhaDoRobo = 'TESOURA'; break;
-     case 3: escolhaDoRobo = 'LAGARTO'; break;
-     case 4: escolhaDoRobo = 'SPOCK'; break;   
+    let escolhaComputador = '';
 
-   }
+    switch (numAleatorio) {
+      case 0: escolhaComputador = 'pedra'; break;
+      case 1: escolhaComputador = 'papel'; break;
+      case 2: escolhaComputador = 'tesoura'; break;
+      default: escolhaComputador = '';
+    }
 
-   var resultado = '';
-   
-   if(escolhaDoRobo == 'PEDRA'){
-     resultado = 'EMPATE!!';
-     if(escolhaUsuario == 'LAGARTO' || escolhaUsuario == 'TESOURA'){
-       resultado = 'Robô Venceu!!!';
-     }
-     if(escolhaUsuario == 'SPOCK' || escolhaUsuario == 'PAPEL'){
-       resultado = 'Você Venceu!!!';
-     }
-   }
+    let resultado = '';
 
-   if(escolhaDoRobo == 'PAPEL'){
-     resultado = 'EMPATE!!';
-     if(escolhaUsuario == 'SPOCK' || escolhaUsuario == 'PEDRA'){
-       resultado = 'Robô Venceu!!!';
-     }
-     if(escolhaUsuario == 'LAGARTO' || escolhaUsuario == 'TESOURA'){
-       resultado = 'Você Venceu!!!';
-     }
-   }
+    if (escolhaComputador === 'pedra') {
+      if (escolhaUsuario === 'pedra') {
+        resultado = 'Empate';
+      }
 
-   if(escolhaDoRobo == 'TESOURA'){
-     resultado = 'EMPATE!!';
-     if(escolhaUsuario == 'PAPEL' || escolhaUsuario == 'LAGARTO'){
-       resultado = 'Robô Venceu!!!';
-     }
-     if(escolhaUsuario == 'PEDRA' || escolhaUsuario == 'SPOCK'){
-       resultado = 'Você Venceu!!!';
-     }
-   }
+      if (escolhaUsuario === 'papel') {
+        resultado = 'Você ganhou';
+      }
 
-   if(escolhaDoRobo == 'LAGARTO'){
-     resultado = 'EMPATE!!';
-     if(escolhaUsuario == 'SPOCK' || escolhaUsuario == 'PAPEL'){
-       resultado = 'Robô Venceu!!!';
-     }
-     if(escolhaUsuario == 'TESOURA' || escolhaUsuario == 'PEDRA'){
-       resultado = 'Você Venceu!!!';
-     }
-   }
+      if (escolhaUsuario === 'tesoura') {
+        resultado = 'Você perdeu';
+      }
+    }
 
-   if(escolhaDoRobo == 'SPOCK'){
-     resultado = 'EMPATE!!';
-     if(escolhaUsuario == 'PEDRA' || escolhaUsuario == 'TESOURA'){
-       resultado = 'Robô Venceu!!!';
-     }
-     if(escolhaUsuario == 'LAGARTO' || escolhaUsuario == 'PAPEL'){
-       resultado = 'Você Venceu!!!';
-     }
-   }
-  
-        
-    
-   this.setState({ escolhaUsuario : escolhaUsuario,
-                   escolhaDoRobo : escolhaDoRobo, 
-                   resultado : resultado                                  
-        });
- }   
- 
- 
+    if (escolhaComputador === 'papel') {
+      if (escolhaUsuario === 'papel') {
+        resultado = 'Empate';
+      }
+
+      if (escolhaUsuario === 'tesoura') {
+        resultado = 'Você ganhou';
+      }
+
+      if (escolhaUsuario === 'pedra') {
+        resultado = 'Você perdeu';
+      }
+    }
+
+    if (escolhaComputador === 'tesoura') {
+      if (escolhaUsuario === 'tesoura') {
+        resultado = 'Empate';
+      }
+
+      if (escolhaUsuario === 'pedra') {
+        resultado = 'Você ganhou';
+      }
+
+      if (escolhaUsuario === 'papel') {
+        resultado = 'Você perdeu';
+      }
+    }
+
+    this.setState({ escolhaUsuario, escolhaComputador, resultado });
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View>
 
-      <Top></Top>
-      <Icon></Icon>
-        
-      <View style={partida.resultados}>
-        
-          <Text style={partida.txtResultados}>{this.state.resultado}</Text>
-          
+        <Topo />
+
+        <View style={styles.painelAcoes}>
+
+          <View style={styles.btnEscolha}>
+            <Button title="pedra" onPress={() => { this.jokenpo('pedra'); }} />
+          </View>
+
+          <View style={styles.btnEscolha}>
+            <Button title="papel" onPress={() => { this.jokenpo('papel'); }} />
+          </View>
+
+          <View style={styles.btnEscolha}>
+            <Button title="tesoura" onPress={() => { this.jokenpo('tesoura'); }} />
+          </View>
+
         </View>
-
         
+        <View style={styles.palco}>
+          <Text style={styles.txtResultado}>{this.state.resultado}</Text>
 
+          <Icone escolha={this.state.escolhaComputador} jogador='Computador' />
+          
+          <Icone escolha={this.state.escolhaUsuario} jogador='Você' />
+
+        </View>
+        
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'skyblue',
-    
-    
-  }
-});
-
-const partida = StyleSheet.create({ 
-  txtResultados:{
-    textAlign:'center',
-    fontSize: 20,
+  btnEscolha: {
+    width: 90
+  },
+  painelAcoes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10
+  },
+  palco: {
+    alignItems: 'center',
+    marginTop: 10
+  },
+  txtResultado: {
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#696969'   
-   
-    
+    color: 'red',
+    height: 60
   }
 });
 
+AppRegistry.registerComponent('app3', () => app3);
