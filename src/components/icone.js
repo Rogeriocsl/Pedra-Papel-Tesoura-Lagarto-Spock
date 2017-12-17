@@ -4,31 +4,33 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 const imgPedra = require('../../imgs/pedra.png');
 const imgPapel = require('../../imgs/papel.png');
 const imgTesoura = require('../../imgs/tesoura.png');
+const imgLagarto = require('../../imgs/lagarto.png');
+const imgSpock = require('../../imgs/spock.png');
+
 
 class Icone extends Component {
   render() {
-    //this.props.escolha
-    //this.props.jogador
+   
 
     if (this.props.escolha === 'pedra') {
       return (
-        <View style={styles.icone}>
-          <Text style={styles.txtJogador}>{this.props.jogador}</Text>
-          <Image source={imgPedra} />
+        <View style={ChoicesPlayers.results}>
+          <Text style={ChoicesPlayers.txtResults}>{this.props.jogador}</Text>
+          <Image style={ChoicesPlayers.choicesImage} source={imgPedra} />
         </View>
       );
     } else if (this.props.escolha === 'papel') {
       return (
-        <View style={styles.icone}>
-          <Text style={styles.txtJogador}>{this.props.jogador}</Text>
-          <Image source={imgPapel} />
+        <View style={ChoicesPlayers.results}>
+          <Text style={ChoicesPlayers.txtResults}>{this.props.jogador}</Text>
+          <Image style={ChoicesPlayers.choicesImage} source={imgPapel} />
         </View>
       );
     } else if (this.props.escolha === 'tesoura') {
       return (
-        <View style={styles.icone}>
-          <Text style={styles.txtJogador}>{this.props.jogador}</Text>
-          <Image source={imgTesoura} />
+        <View style={ChoicesPlayers.results}>
+          <Text style={ChoicesPlayers.txtResults}>{this.props.jogador}</Text>
+          <Image style={ChoicesPlayers.choicesImage} source={imgTesoura} />
         </View>
       );
     }
@@ -37,14 +39,40 @@ class Icone extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  icone: {
-    alignItems: 'center',
-    marginBottom: 20
-  },
-  txtJogador: {
-    fontSize: 18
-  }
-});
+
 
 export default Icone;
+
+/* styles escolha do jogador,
+  player choice
+*/
+const ChoicesPlayers = StyleSheet.create({
+  /*resultados*/
+  results:{
+    justifyContent:'center',
+    height:170,
+    
+    
+
+  },
+  /*txt resultados*/
+  txtResults:{
+    textAlign:'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#696969'
+    
+   
+    
+  },
+
+  /*escolha imagem*/
+  choicesImage:{
+    height: 80,
+    width: 80,
+    alignSelf: 'center',
+    
+
+
+  }
+});
